@@ -1,0 +1,3 @@
+#+TITLE: ReadMe
+
+This is chiko's personal trial test and study project.
