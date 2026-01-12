@@ -12,10 +12,8 @@
 	    "wayland-protocols"
 	    "egl-wayland"
 	    "libxkbcommon"
-	    "libglvnd"
 	    "alsa-lib"
 	    "libgudev"
 	    "vulkan-loader"
-	    "nvidia-driver"
-	    "nvda"
+	    "mesa"
 	    ))))
