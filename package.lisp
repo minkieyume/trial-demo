@@ -1,3 +1,5 @@
+;; SPDX-License-Identifier: Zlib
+;; Copyright © 2026 Minkie Yume <minkieyume@yumieko.com>
 (defpackage #:org.chiko.trialdemo
   (:use #:cl+trial)
   (:shadow #:main #:launch)

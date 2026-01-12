@@ -1,3 +1,5 @@
+;; SPDX-License-Identifier: Zlib
+;; Copyright © 2026 Minkie Yume <minkieyume@yumieko.com>
 (use-modules (guix build utils)
 	     (guix packages))
 
