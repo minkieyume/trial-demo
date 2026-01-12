@@ -1,0 +1,2 @@
+use guix
+export LD_LIBRARY_PATH=$(guix build nvda)/lib:$(guix build libglvnd)/lib:$LD_LIBRARY_PATH
