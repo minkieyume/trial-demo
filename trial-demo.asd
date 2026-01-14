@@ -5,4 +5,6 @@
                (:file "main"))
   :depends-on (:trial
                :trial-glfw
-               :trial-png))
+               :trial-png
+	       :trial-alloy
+	       :trial-assets))
