@@ -43,6 +43,16 @@
 (define-asset (character cha1) sprite-data
     #p"free_character_1.json")
 
+(define-shader-entity <player> (animated-sprite)
+  ((playback-speed :initform 0.0)))
+
+(defmethod idle ((player <player>))
+  (setf (playback-speed player) 0.0)
+  (setf (frame player) 1))
+
+(defmethod walk ((player <player>))
+  (setf (playback-speed player) 1.0))
+
 ;; (defvar cha1-sprite)
 
 ;; (define-shader-entity <character1> (sprite-entity listener)
@@ -56,9 +66,12 @@
 ;; 加maybe-reload-scene，确保改动后自动热重载
 (progn
   (defmethod setup-scene ((main <main>) scene)
-    (enter (make-instance 'animated-sprite :sprite-data (asset 'character 'cha1)) scene)
-    (let ((cam (make-instance '2d-camera :location (vec 0 0 100))))
-      (setf (zoom cam) 0.01)
+    (let ((cam (make-instance 'sidescroll-camera :location (vec -450 -500 0)
+						 :zoom 6.0))
+	  (cha1 (make-instance '<player> :name :cha1
+					 :sprite-data (asset 'character 'cha1))))
+      (enter cha1 scene)
+      (idle cha1)
       (enter cam scene))
     (enter (make-instance 'render-pass) scene))
   (maybe-reload-scene))
