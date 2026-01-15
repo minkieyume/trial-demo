@@ -2,6 +2,8 @@
 ;; Copyright © 2026 Minkie Yume <minkieyume@yumieko.com>
 (defpackage #:org.minkieyume.trial-demo
   (:use #:cl+trial)
+  (:import-from #:alexandria
+		#:symbolicate)
   (:shadow #:main #:launch)
   (:local-nicknames
    (#:assets #:org.shirakumo.fraf.trial.assets)

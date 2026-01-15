@@ -46,22 +46,16 @@
 (define-shader-entity <player> (animated-sprite)
   ((playback-speed :initform 0.0)))
 
-(defmethod idle ((player <player>))
+(defmethod idle ((player <player>) &optional (dir nil))
+  (when (and dir (typep dir 'symbol))
+    (setf (animation player) (symbolicate '-walk- dir)))
   (setf (playback-speed player) 0.0)
   (setf (frame player) 1))
 
-(defmethod walk ((player <player>))
+(defmethod walk ((player <player>) &optional (dir nil))
+  (when (and dir (typep dir 'symbol))
+    (setf (animation player) (symbolicate '-walk- dir)))
   (setf (playback-speed player) 1.0))
-
-;; (defvar cha1-sprite)
-
-;; (define-shader-entity <character1> (sprite-entity listener)
-;;   (vertex-array :initform))
-
-;; 根据后缀自动匹配图片导入为assets。
-;; (define-assets-from-path (my-pool image "*.png")
-;;   (T :min-filter :nearest :mag-filter :nearest)
-;;   (logo :min-filter :linear :mag-filter :linear))
 
 ;; 加maybe-reload-scene，确保改动后自动热重载
 (progn

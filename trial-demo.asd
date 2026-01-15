@@ -7,4 +7,5 @@
                :trial-glfw
                :trial-png
 	       :trial-alloy
-	       :trial-assets))
+	       :trial-assets
+	       :alexandria))
