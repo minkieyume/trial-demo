@@ -43,19 +43,37 @@
 (define-asset (character cha1) sprite-data
     #p"free_character_1.json")
 
-(define-shader-entity <player> (animated-sprite)
+(define-shader-entity <player> (animated-sprite transformed-entity)
   ((playback-speed :initform 0.0)))
 
 (defmethod idle ((player <player>) &optional (dir nil))
-  (when (and dir (typep dir 'symbol))
+  (when (or (and dir (typep dir 'symbol))
+	    (typep dir 'string)
+	    (typep dir 'character))
     (setf (animation player) (symbolicate '-walk- dir)))
   (setf (playback-speed player) 0.0)
   (setf (frame player) 1))
 
 (defmethod walk ((player <player>) &optional (dir nil))
-  (when (and dir (typep dir 'symbol))
-    (setf (animation player) (symbolicate '-walk- dir)))
-  (setf (playback-speed player) 1.0))
+  (if (or (and dir (typep dir 'symbol))
+	  (typep dir 'string)
+	  (typep dir 'character))
+      ;; (setf (animation player) (symbolicate '-walk- dir))
+      (play (symbolicate '-walk- dir) player)
+      (play (animation player) player)))
+;; (setf (playback-speed player) 1.0)
+
+(defparameter *movingp* nil
+  "判断玩家是否正在移动。")
+
+(define-handler (<player> post-tick) (dt)
+  (let ((movement (directional 'move))
+	(dzerop (v= (directional 'move) (vzero (vec4))))
+        (speed 100.0))
+    (cond ((and *movingp* dzerop) (setf *movingp* nil) (idle <player>))
+	  ((and (not *movingp*) (not dzerop)) (setf *movingp* t) (walk <player>)))
+    (incf (vx (location <player>)) (* dt speed (vx movement)))
+    (incf (vy (location <player>)) (* dt speed (vy movement)))))
 
 ;; 加maybe-reload-scene，确保改动后自动热重载
 (progn
@@ -66,6 +84,7 @@
 					 :sprite-data (asset 'character 'cha1))))
       (enter cha1 scene)
       (idle cha1)
+      ;; (walk cha1)
       (enter cam scene))
     (enter (make-instance 'render-pass) scene))
   (maybe-reload-scene))
