@@ -47,6 +47,8 @@
   ((playback-speed :initform 0.0)))
 
 (defmethod idle ((player <player>) &optional (dir nil))
+  (print "stop_walk")
+  (format t "PlaySpeed: ~a" (playback-speed player))
   (when (or (and dir (typep dir 'symbol))
 	    (typep dir 'string)
 	    (typep dir 'character))
@@ -55,6 +57,10 @@
   (setf (frame player) 1))
 
 (defmethod walk ((player <player>) &optional (dir nil))
+  (print "start_walk")
+  (format t "PlaySpeed: ~a" (playback-speed player))
+  ;; (print "animation" (animation player))
+  ;; (print "clock" (clock player))
   (if (or (and dir (typep dir 'symbol))
 	  (typep dir 'string)
 	  (typep dir 'character))
@@ -66,14 +72,17 @@
 (defparameter *movingp* nil
   "判断玩家是否正在移动。")
 
-(define-handler (<player> post-tick) (dt)
-  (let ((movement (directional 'move))
+(defmethod handle :after ((ev tick) (player <player>))
+  (let ((dt (dt ev))
+	(movement (directional 'move))
 	(dzerop (v= (directional 'move) (vzero (vec4))))
         (speed 100.0))
-    (cond ((and *movingp* dzerop) (setf *movingp* nil) (idle <player>))
-	  ((and (not *movingp*) (not dzerop)) (setf *movingp* t) (walk <player>)))
-    (incf (vx (location <player>)) (* dt speed (vx movement)))
-    (incf (vy (location <player>)) (* dt speed (vy movement)))))
+    ;; (print "dzerop: " dzerop)
+    ;; (print "*movingp*: " *movingp*)
+    (cond ((and *movingp* dzerop) (setf *movingp* nil) (idle player))
+	  ((and (not *movingp*) (not dzerop)) (setf *movingp* t) (walk player)))
+    (incf (vx (location player)) (* dt speed (vx movement)))
+    (incf (vy (location player)) (* dt speed (vy movement)))))
 
 ;; 加maybe-reload-scene，确保改动后自动热重载
 (progn
