@@ -95,16 +95,25 @@
     (incf (vx (location player)) (* dt speed (vx movement)))
     (incf (vy (location player)) (* dt speed (vy movement)))))
 
+(define-pool tileset
+  :base #.(asdf:system-relative-pathname :trial-demo "assets/external_packs/overworld-pack-free_version/autotiles/"))
+
+(define-pool map
+  :base #.(asdf:system-relative-pathname :trial-demo "assets/map/"))
+
+(define-asset (map themap) tile-data #p"the-map.json")
+
 ;; 加maybe-reload-scene，确保改动后自动热重载
 (progn
   (defmethod setup-scene ((main <main>) scene)
     (let ((cam (make-instance 'sidescroll-camera :location (vec -450 -500 0)
 						 :zoom 6.0))
 	  (cha1 (make-instance '<player> :name :cha1
-					 :sprite-data (asset 'character 'cha1))))
+					 :sprite-data (asset 'character 'cha1)))
+	  (map1 (make-instance 'tile-layer :tile-data (asset 'map 'themap))))
       (idle cha1)
-      (enter cha1 scene)      
-      ;; (walk cha1)
+      (enter cha1 scene)
+      ;; (enter map1 scene)
       (enter cam scene))
     (enter (make-instance 'render-pass) scene))
   (maybe-reload-scene))
