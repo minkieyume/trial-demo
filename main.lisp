@@ -103,6 +103,8 @@
 
 (define-asset (map themap) tile-data #p"the-map.json")
 
+;; (define-asset (map themap) tile-data #p"the-map.tmj")
+
 ;; 加maybe-reload-scene，确保改动后自动热重载
 (progn
   (defmethod setup-scene ((main <main>) scene)
@@ -113,7 +115,7 @@
 	  (map1 (make-instance 'tile-layer :tile-data (asset 'map 'themap))))
       (idle cha1)
       (enter cha1 scene)
-      ;; (enter map1 scene)
+      (enter map1 scene)
       (enter cam scene))
     (enter (make-instance 'render-pass) scene))
   (maybe-reload-scene))

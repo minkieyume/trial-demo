@@ -3,11 +3,17 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "the-map.json",
+    "activeFile": "free_autotile_0.json",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "全部文件 (*)",
     "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
+        ":/automap-tiles.tsx": {
+            "scaleInDock": 1
+        },
         "free_autotile_0.json": {
             "scaleInDock": 1,
             "scaleInEditor": 2
@@ -25,11 +31,19 @@
             "scaleInEditor": 8
         },
         "the-map.json": {
-            "scale": 0.33,
+            "scale": 0.25,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 531.8181818181819,
-                "y": 274.24242424242436
+                "x": 1194,
+                "y": 462
+            }
+        },
+        "the-map.tmj": {
+            "scale": 0.25,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 790,
+                "y": 734
             }
         },
         "the-map.tmx": {
@@ -43,24 +57,28 @@
     },
     "last.exportedFilePath": "/home/minkieyume/Develop/GameDevelop/demo/trial_demo/assets/map",
     "last.externalTilesetPath": "/home/minkieyume/Develop/GameDevelop/demo/trial_demo/assets/map",
-    "last.imagePath": "/home/minkieyume/Develop/GameDevelop/demo/trial_demo/assets/external_packs/overworld-pack-free_version/autotiles",
-    "map.fixedSize": false,
+    "last.imagePath": "/home/minkieyume/Develop/GameDevelop/demo/trial_demo/assets/map/external_packs/overworld-pack-free_version/autotiles",
+    "map.fixedSize": true,
+    "map.height": 32,
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.lastUsedFormat": "json",
     "map.tileHeight": 48,
     "map.tileWidth": 48,
+    "map.width": 32,
     "openFiles": [
-        "the-map.json"
+        "the-map.json",
+        "free_autotile_0.json"
     ],
     "project": "demo.tiled-project",
     "recentFiles": [
+        "free_autotile_0.json",
         "the-map.json",
         "the-map.tmx",
         "free_autotile_2.json",
-        "free_autotile_0.json",
         "free_autotile_2.tsx",
         "free_autotile_0.tsx"
     ],
+    "tileset.embedInMap": true,
     "tileset.lastUsedFilter": "JSON 图块文件 (*.tsj *.json)",
     "tileset.lastUsedFormat": "json",
     "tileset.tileSize": {
